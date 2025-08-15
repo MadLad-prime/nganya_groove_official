@@ -1,0 +1,306 @@
+/* ===================================================================
+   KCM ADMIN PANEL STYLES - REFRESHED & RESPONSIVE
+   =================================================================== */
+
+:root {
+    --kcm-pink: #e612a6;
+    --kcm-gold: #FFD700;
+    --dark-bg: #121212;
+    --card-bg: #1E1E1E;
+    --sidebar-bg: #0A0A0A;
+    --text-primary: #E0E0E0;
+    --text-secondary: #A0A0A0;
+    --border-color: #2a2a2a;
+    --danger-color: #c02b82;
+    --danger-hover: #e73c8c;
+    --success-bg: rgba(46, 204, 113, 0.15);
+    --success-border: #2ecc71;
+    --error-bg: rgba(231, 60, 188, 0.2);
+    --error-border: #c02bac;
+}
+
+/* --- GLOBAL & PRELOADER --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: var(--dark-bg);
+    color: var(--text-primary);
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+}
+#preloader {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: var(--dark-bg); z-index: 10000; display: flex;
+    align-items: center; justify-content: center; transition: opacity 0.5s ease;
+}
+.spinner {
+    border: 8px solid rgba(255, 255, 255, 0.1);
+    border-top: 8px solid var(--kcm-pink);
+    border-radius: 50%; width: 70px; height: 70px;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* --- AUTHENTICATION SCREEN --- */
+#auth-container.page-hero-section {
+    background-image: url('images/hero.jpg');
+    min-height: 100vh; display: flex;
+}
+#sign-in-button.nav-cta { font-size: 1rem; }
+#auth-error {
+    color: #f5b1e6; background-color: var(--error-bg);
+    padding: 12px 15px; border-radius: 8px; margin-top: 25px;
+    display: inline-block; border: 1px solid var(--error-border);
+}
+
+/* ===================================================================
+   CORE DASHBOARD LAYOUT & SCROLLING FIX
+   =================================================================== */
+.dashboard-container {
+    display: flex; /* Changed from none/flex to just flex */
+    width: 100%;
+    height: 100vh; /* CRITICAL: Fixed height to enable internal scrolling */
+    background-color: var(--dark-bg);
+    position: relative;
+    overflow: hidden; /* Prevent body scroll */
+}
+
+.sidebar {
+    background-color: var(--sidebar-bg);
+    color: var(--text-primary);
+    width: 260px;
+    flex-shrink: 0; /* Prevent sidebar from shrinking */
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--border-color);
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 1001;
+}
+
+.main-content {
+    flex-grow: 1;
+    overflow-y: auto; /* CRITICAL: This is where scrolling happens */
+    padding: 40px;
+}
+
+/* ===================================================================
+   SIDEBAR STYLING (DESKTOP & MOBILE)
+   =================================================================== */
+.sidebar-header {
+    padding: 20px 15px;
+}
+.sidebar-header h1 {
+    text-align: center;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2.2rem;
+    color: var(--kcm-pink);
+    margin: 0;
+}
+.user-info {
+    padding: 0 20px 25px; text-align: center;
+    border-bottom: 1px solid var(--border-color);
+}
+.user-info img {
+    width: 60px; height: 60px; border-radius: 50%;
+    margin: 15px auto 10px; border: 3px solid var(--kcm-pink);
+    transition: transform 0.3s ease;
+}
+.user-info img:hover { transform: scale(1.1); }
+.user-info strong { display: block; font-size: 1.1rem; font-weight: 500; color: #fff; }
+.user-info small { font-size: 0.85rem; color: #888; }
+
+.sidebar nav {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+.sidebar nav ul { list-style-type: none; padding: 0; margin: 15px 0; }
+.sidebar nav li a {
+    display: flex; align-items: center; padding: 14px 25px;
+    color: var(--text-secondary); text-decoration: none; font-weight: 500;
+    transition: all 0.2s ease-in-out; border-left: 4px solid transparent;
+}
+.sidebar nav li a:hover {
+    background-color: #1a1a1a; color: var(--kcm-pink);
+    border-left-color: var(--kcm-pink);
+}
+.sidebar nav li a.active {
+    background-color: #222; color: #fff; font-weight: 700;
+    border-left-color: var(--kcm-pink);
+}
+#sign-out-button-sidebar {
+    background: var(--danger-color); border: none; color: #fff;
+    margin: 20px; padding: 12px; display: block;
+    width: calc(100% - 40px); border-radius: 8px; font-weight: bold;
+    cursor: pointer; transition: background-color 0.3s ease;
+}
+#sign-out-button-sidebar:hover { background: var(--danger-hover); }
+
+/* ===================================================================
+   MAIN CONTENT STYLING (SECTIONS, CARDS, FORMS)
+   =================================================================== */
+.content-section {
+    display: none;
+    background-color: var(--card-bg);
+    padding: 30px; border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    margin-bottom: 30px; border: 1px solid var(--border-color);
+}
+.content-section.active { display: block; }
+
+.content-section h2 {
+    font-family: 'Bebas Neue', cursive; font-size: 2.8rem;
+    color: #fff; margin: 0 0 10px;
+    padding-bottom: 10px; border-bottom: 1px solid var(--border-color);
+}
+.content-section p { color: var(--text-secondary); margin-bottom: 30px; }
+
+/* Forms */
+.form-group { margin-bottom: 25px; }
+.form-group label { display: block; color: var(--text-secondary); font-size: 0.9rem; font-weight: 500; margin-bottom: 8px;}
+.form-group input, .form-group textarea {
+    width: 100%; padding: 12px; background-color: #2C2C2C;
+    border: 1px solid #444; border-radius: 8px; color: var(--text-primary);
+    font-size: 1rem; transition: all 0.3s ease;
+}
+.form-group input:focus, .form-group textarea:focus {
+    outline: none; border-color: var(--kcm-pink);
+    box-shadow: 0 0 0 4px rgba(230, 18, 166, 0.2);
+}
+/* Buttons */
+.nav-cta, .btn-secondary { transition: all 0.3s ease; }
+.nav-cta:hover, .btn-secondary:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+
+/* Status Messages */
+#status, #blog-status, #admin-product-status, #admin-booking-status, #admin-order-status {
+    border-radius: 8px; padding: 12px 15px; font-size: 0.95rem;
+    font-weight: 500; margin-top: 20px;
+}
+.success { background-color: var(--success-bg); color: #a7e5c9; border: 1px solid var(--success-border); }
+.error { background-color: var(--error-bg); color: #f5b7b1; border: 1px solid var(--error-border); }
+
+/* Image Previews */
+#blog-cover-preview, #product-image-preview {
+    max-width: 250px; margin-top: 15px; border: 2px dashed #444;
+    padding: 5px; background-color: var(--dark-bg); border-radius: 8px;
+}
+
+/* Data Cards (Bookings & Orders) */
+.booking-card, .order-card {
+    background-color: #2C2C2C; border: 1px solid #444; padding: 20px;
+    margin-bottom: 20px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.booking-card:hover, .order-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.5); }
+
+.booking-card { border-left: 5px solid var(--kcm-pink); }
+.order-card { border-left: 5px solid var(--kcm-gold); }
+
+.booking-card h4, .order-card h4 {
+    font-family: 'Bebas Neue', cursive; font-size: 1.6rem; margin: 0 0 12px;
+}
+.booking-card h4 { color: #fff; }
+.order-card h4 { color: var(--kcm-gold); }
+
+.booking-card h4 small, .order-card h4 small {
+    font-family: 'Montserrat', sans-serif; font-size: 0.8rem; color: #888;
+    font-weight: 400; margin-left: 10px;
+}
+.booking-card p { margin: 0 0 10px; font-size: 0.95rem; color: var(--text-secondary); }
+.booking-card p strong { color: var(--text-primary); font-weight: 500; min-width: 120px; display: inline-block; }
+
+.order-items-list { list-style: none; padding-left: 15px; margin: 15px 0; border-left: 2px solid #444; }
+.order-items-list li { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 5px; }
+.order-items-list li strong { color: var(--text-primary); }
+
+.order-total { font-size: 1.2rem; font-weight: bold; margin-top: 15px; }
+.order-total strong { color: var(--kcm-gold); }
+
+.booking-meta, .order-meta {
+    font-size: 0.85rem; color: #888; margin-top: 15px;
+    border-top: 1px solid var(--border-color); padding-top: 10px;
+}
+
+.booking-actions, .order-actions {
+    margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--border-color);
+    display: flex; gap: 10px; flex-wrap: wrap; /* Allow buttons to wrap on mobile */
+}
+.booking-actions button, .order-actions button {
+    background-color: #333; color: var(--text-primary); border: 1px solid #555;
+    padding: 8px 12px; border-radius: 5px; cursor: pointer; font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+.booking-actions button:hover, .order-actions button:hover {
+    background-color: var(--kcm-pink); color: #111; border-color: var(--kcm-pink);
+}
+.delete-booking, .delete-order { background-color: var(--danger-color) !important; border-color: #7c1e64 !important; }
+.delete-booking:hover, .delete-order:hover { background-color: var(--danger-hover) !important; }
+
+.no-bookings, .no-orders {
+    color: var(--text-secondary); font-style: italic; padding: 20px; text-align: center;
+    background-color: #252525; border-radius: 8px;
+}
+
+/* ===================================================================
+   MOBILE RESPONSIVENESS (< 900px)
+   =================================================================== */
+@media (max-width: 900px) {
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        transform: translateX(-100%); /* Start hidden */
+        box-shadow: 5px 0 25px rgba(0,0,0,0.4);
+    }
+    .sidebar:not(.closed) {
+        transform: translateX(0);
+    }
+    .main-content {
+        padding: 20px;
+        padding-top: 80px; /* Space for the header toggle button */
+    }
+    .sidebar-toggle {
+        display: block;
+        position: fixed; left: 20px; top: 20px; z-index: 1002;
+        background-color: var(--card-bg); border: 1px solid var(--border-color);
+        color: var(--text-primary); font-size: 1.5rem; padding: 8px 14px;
+        cursor: pointer; border-radius: 8px; transition: all 0.3s ease;
+    }
+    .sidebar-toggle:hover { background-color: var(--kcm-pink); color: #111; }
+    
+    /* When sidebar is open on mobile, add a backdrop */
+    .sidebar-backdrop {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.4s ease;
+    }
+    .sidebar-backdrop.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* Stack booking card details on mobile */
+    .booking-card p strong {
+        display: block;
+        min-width: unset;
+        margin-bottom: 2px;
+        color: #fff;
+    }
+    .content-section h2 { font-size: 2.2rem; }
+}
+
+@media (max-width: 480px) {
+    .main-content {
+        padding: 15px;
+        padding-top: 75px;
+    }
+    .content-section {
+        padding: 20px;
+    }
+}

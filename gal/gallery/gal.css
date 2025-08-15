@@ -1,0 +1,1291 @@
+/* Basic Reset & Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /* Smooth scrolling for anchors */
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+    color: #E0E0E0; /* Lighter text for dark theme */
+    background-color: #121212; /* Darker base background */
+    overflow-x: hidden; /* Prevent horizontal scroll from animations */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Bebas Neue', cursive;
+    letter-spacing: 1.5px; /* Slightly more spacing */
+    margin-bottom: 1rem;
+    font-weight: 400; /* Bebas Neue is already bold */
+}
+
+a {
+    text-decoration: none;
+    color: #ff00aa; /* Matatu Gold */
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 0 20px;
+}
+
+.content-section {
+    padding: 80px 20px; /* More padding */
+    text-align: center;
+}
+
+.content-section h2 {
+    font-size: 3.2rem; /* Larger section titles */
+    margin-bottom: 40px;
+    color: #FFFFFF; /* White titles on dark bg */
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block; /* For ::after pseudo-element */
+}
+
+.content-section h2::after { /* Underline accent */
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: #ff00d4;
+    margin: 10px auto 0;
+}
+
+/* --- Animation Keyframes & Classes --- */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-60px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(60px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes shimmer { /* For Hero Title - Optional */
+    0% { background-position: -1000px 0; }
+    100% { background-position: 1000px 0; }
+}
+
+/* Initial load animations */
+.animate-on-load {
+    opacity: 0; /* Start hidden */
+    animation-duration: 0.8s;
+    animation-fill-mode: forwards; /* Retain end state */
+    animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smoother ease */
+}
+
+
+/* Scroll-triggered animations setup */
+.animate-on-scroll {
+    opacity: 0; /* Start hidden, JS will make it visible */
+    transition-property: opacity, transform;
+    transition-duration: 0.8s;
+    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275); /* slight overshoot */
+}
+
+.animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: none; /* Reset transform set by specific animation type */
+}
+
+/* Define initial states for different scroll animations */
+.fadeInUp-scroll { transform: translateY(50px); }
+.fadeInLeft-scroll { transform: translateX(-70px); }
+.fadeInRight-scroll { transform: translateX(70px); }
+/* For simple fade-in, no transform needed beyond opacity 0 initially */
+
+
+/* Navigation */
+header {
+    background-color: rgba(10, 10, 10, 0.8); /* Darker, more transparent */
+    backdrop-filter: blur(10px); /* Glassmorphism effect */
+    -webkit-backdrop-filter: blur(10px);
+    color: #fff;
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.2);
+}
+
+nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px; /* More padding */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2.2rem;
+    color: #ff008c; /* Matatu Gold */
+    font-weight: bold;
+}
+
+.nav-links-center a {
+    color: #E0E0E0;
+    margin: 0 25px; /* More spacing */
+    font-size: 1.05rem;
+    font-weight: 500;
+    transition: color 0.3s ease, transform 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    position: relative; /* For hover effect */
+}
+
+.nav-links-center a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ff009d;
+    transition: width 0.3s ease;
+}
+
+.nav-links-center a:hover {
+    color: #ff00d4;
+    transform: translateY(-2px);
+}
+.nav-links-center a:hover::after {
+    width: 100%;
+}
+
+
+.nav-cta {
+    background: linear-gradient(45deg, #ff0077, #ff00dd);
+    color: #1a1a1a;
+    padding: 0.8rem 1.8rem;
+    border-radius: 30px; /* Pill shape */
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(255, 0, 179, 0.3);
+}
+
+.nav-cta:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 0, 179, 0.5);
+}
+
+/* Hero Section */
+#hero {
+    height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    /* Replace video with background image */
+    background-image: url('images/hero.jpg'); /* Vibrant placeholder */
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed; /* Parallax-like effect */
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8)); /* Gradient overlay */
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-content h1 {
+    font-size: 7rem; /* Even BIGGER title */
+    color: #FFFFFF;
+    text-shadow: 0 0 10px #ff00c8, 0 0 20px #ff00bf, 0 0 30px rgba(255, 0, 157, 0.7), 4px 4px 10px rgba(0, 0, 0, 0.5);
+    margin: 0;
+    /* Optional Shimmer Effect - Apply this class in HTML if desired */
+}
+.hero-title.shimmer-effect {
+    background: linear-gradient(to right, #ff00c8 20%, #FFFFFF 40%, #ff00dd 60%);
+    background-size: 200% auto;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: shimmer 3s linear infinite, fadeInUp 1s 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+
+/* Latest Blog Section */
+#latest-blog {
+    background-color: #1a1a1a; /* Darker section background */
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Slightly larger min card width */
+    gap: 40px; /* More gap */
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+.blog-card {
+    background-color: #222222; /* Dark card background */
+    border-radius: 12px; /* More rounded */
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3); /* Softer, more prominent shadow */
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+    text-align: left;
+    color: #C5C5C5;
+}
+
+.blog-card:hover {
+    transform: translateY(-10px) scale(1.02); /* More pronounced hover */
+    box-shadow: 0 12px 35px rgba(255, 0, 191, 0.2); /* Goldish glow on hover */
+}
+
+.blog-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.4s ease; /* Image zoom on card hover */
+}
+.blog-card:hover img {
+    transform: scale(1.05);
+}
+
+.blog-card-content {
+    padding: 25px;
+}
+
+.blog-card-content h3 {
+    font-size: 1.7rem; /* Larger card title */
+    color: #FFFFFF;
+    margin-bottom: 12px;
+    transition: color 0.3s ease;
+}
+.blog-card:hover .blog-card-content h3 {
+    color: #ff00b3;
+}
+
+.blog-card-content p {
+    font-size: 0.95rem;
+    color: #A0A0A0; /* Lighter paragraph text */
+    margin-bottom: 20px;
+    min-height: 60px;
+}
+
+.read-more-btn {
+    display: inline-block;
+    background-color: transparent;
+    color: #ff00c8;
+    padding: 10px 18px;
+    border-radius: 20px;
+    border: 2px solid #ff00b3;
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    text-transform: uppercase;
+}
+
+.read-more-btn:hover {
+    background-color: #ff00b3;
+    color: #111;
+    transform: scale(1.05);
+}
+
+.view-all-container {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.btn-secondary {
+    display: inline-block;
+    padding: 14px 35px;
+    background: linear-gradient(45deg, #444, #222);
+    color: #ff00ff;
+    border: 2px solid #ff00b3;
+    border-radius: 30px; /* Pill shape */
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: background 0.4s ease, color 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(45deg, #ff0095, #ff00bf);
+    color: #111;
+    border-color: #ff0077;
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 6px 20px rgba(255, 0, 170, 0.4);
+}
+
+
+/* About Us Section */
+#about-us {
+    background-color: #121212; /* Consistent dark bg */
+}
+
+.about-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 50px; /* More gap */
+    text-align: left;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.about-image {
+    flex: 1 1 350px; /* Allow image to be a bit larger */
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    transition: transform 0.4s ease;
+}
+.about-image:hover {
+    transform: scale(1.03);
+}
+
+.about-text {
+    flex: 1.5 1 400px; /* Give text a bit more relative space */
+}
+
+.about-text p {
+    margin-bottom: 20px;
+    font-size: 1.05rem;
+    color: #B0B0B0;
+    line-height: 1.7;
+}
+
+/* Footer */
+footer {
+    background-color: #0A0A0A; /* Even darker footer */
+    color: #A0A0A0;
+    padding: 60px 20px 20px;
+    border-top: 1px solid #222; /* Subtle top border */
+}
+
+.footer-content {
+    max-width: 1100px;
+    margin: 0 auto 40px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    text-align: left;
+}
+
+.footer-section h4 {
+    color: #ff00aa;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    color: #A0A0A0;
+    transition: color 0.3s ease, padding-left 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+    color: #ff00b3;
+    padding-left: 5px; /* Slight indent on hover */
+}
+
+.footer-section p {
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+}
+
+.social-icons img {
+    width: 35px; /* Larger social icons */
+    height: 35px;
+    margin-right: 15px;
+    display: inline-block;
+    opacity: 0.7;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.social-icons a:hover img {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid #282828;
+    font-size: 0.9rem;
+}
+
+.footer-bottom p {
+    margin-bottom: 8px;
+    color: #777;
+}
+
+.watermark {
+    font-size: 0.85rem;
+    color: #555;
+    letter-spacing: 0.5px;
+}
+
+/* Responsive Design Adjustments (add to existing media queries or refine) */
+@media (max-width: 992px) {
+    .hero-content h1 {
+        font-size: 5.5rem;
+    }
+    .nav-links-center a {
+        margin: 0 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Nav stacking remains similar, just ensure animation targets work */
+    .nav-links-center a {
+        margin: 8px 10px; /* Adjusted for stacked appearance */
+    }
+    header {
+        padding: 0.8rem 0; /* Reduce padding when stacked */
+         backdrop-filter: blur(8px); /* Slightly less blur on mobile */
+        -webkit-backdrop-filter: blur(8px);
+    }
+
+    #hero {
+        height: 85vh;
+        background-attachment: scroll; /* Disable fixed attachment on mobile if it causes perf issues */
+    }
+    .hero-content h1 {
+        font-size: 3.8rem;
+    }
+
+    .content-section h2 {
+        font-size: 2.5rem;
+    }
+    .content-section {
+        padding: 60px 15px;
+    }
+
+    .about-content {
+        gap: 30px;
+    }
+    .about-image {
+        flex-basis: 100%; /* Full width on mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 3rem;
+        text-shadow: 0 0 8px #ff00d4, 0 0 15px #ff00d4, 0 0 20px rgba(255, 0, 212, 0.6), 3px 3px 8px rgba(0, 0, 0, 0.4);
+    }
+    .nav-logo { font-size: 1.8rem;}
+    .nav-links-center a {
+        font-size: 0.95rem;
+        margin: 5px 8px;
+    }
+    .nav-cta {
+        padding: 0.7rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    .blog-card-content h3 {
+        font-size: 1.4rem;
+    }
+    .content-section h2 {
+        font-size: 2.1rem;
+    }
+    .btn-secondary, .read-more-btn {
+        padding: 10px 20px; /* Slightly smaller padding */
+        font-size: 0.85rem;
+    }
+}
+
+/* --- Gallery Page Specific Styles --- */
+
+/* Optional: A dedicated hero for internal pages if different from homepage */
+.page-hero-section {
+    height: 50vh; /* Shorter than main hero */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    background-image: url('https://images.unsplash.com/photo-1606109411508-73aa270f5a4b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8a2VueWFuJTIwbWF0YXR1fGVufDB8fDB8fHww&auto=format&fit=crop&w=1920&q=70'); /* Different, more abstract/textured background */
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+}
+
+/* Re-use .hero-overlay and .hero-content, but .hero-title might need adjustment for .page-hero-section */
+.page-hero-section .hero-content h1 {
+    font-size: 4.5rem; /* Slightly smaller for internal page heroes */
+    color: #FFFFFF;
+    text-shadow: 0 0 8px #ff00aa, 0 0 15px #ff00dd, 0 0 25px rgba(255, 0, 170, 0.6), 3px 3px 8px rgba(0, 0, 0, 0.5);
+}
+
+
+#gallery-showcase {
+    background-color: #1a1a1a; /* Consistent dark section background */
+}
+
+.gallery-intro {
+    font-size: 1.1rem;
+    color: #B0B0B0;
+    max-width: 700px;
+    margin: 0 auto 50px auto; /* Centered and spaced */
+    line-height: 1.7;
+}
+
+.gallery-grid {
+    display: grid;
+    /* Adjust minmax for desired image size, and number of columns */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px; /* Gap between items */
+    padding: 20px 0;
+}
+
+.gallery-item {
+    background-color: #252525; /* Darker item background */
+    border-radius: 8px;
+    overflow: hidden; /* To crop image nicely if needed, and for img scale effect */
+    box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+    position: relative; /* For potential overlay later */
+}
+
+.gallery-item:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 10px 25px rgba(255, 0, 221, 0.25); /* Goldish glow on hover */
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 300px; /* Fixed height for consistency in a row */
+    object-fit: cover; /* Ensures image covers the area, might crop */
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1); /* Subtle zoom on image itself */
+}
+
+/* For items that might need to span more columns or have different aspect ratios */
+.gallery-item-large {
+    grid-column: span 1; /* Default span */
+}
+.gallery-item-large img {
+    height: 350px; /* Taller for 'large' items if desired */
+}
+
+/* If you have a specific number of columns (e.g. 3), and want the last few items
+   to stretch or be centered, you might need more complex grid styling for the last row.
+   For example, to make the last two items (in a 3-column grid for 11 items) a bit larger:
+   Assuming we always want approx 3 columns, the last two can span or just align.
+   `auto-fit` handles this fairly well, but for very specific layouts for the last items: */
+@media (min-width: 992px) { /* Affecting larger screens where 3 columns likely fit */
+    /* Removed empty .gallery-grid ruleset to avoid empty ruleset error */
+    /* If you had exactly 2 items left and a 3 column grid, to make them span 1.5 or something */
+    /* Example: If the last two items were to take more space */
+    /* Removed empty ruleset for .gallery-item.gallery-item-large:nth-last-child(-n+2) to avoid errors */
+}
+
+/* Responsive Adjustments for Gallery */
+@media (max-width: 768px) {
+    .page-hero-section {
+        height: 40vh;
+    }
+    .page-hero-section .hero-content h1 {
+        font-size: 3.5rem;
+    }
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+    }
+    .gallery-item img {
+        height: 250px;
+    }
+    .gallery-intro {
+        font-size: 1rem;
+        margin-bottom: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-hero-section {
+        height: 35vh;
+    }
+    .page-hero-section .hero-content h1 {
+        font-size: 2.8rem;
+    }
+    .gallery-grid {
+        grid-template-columns: 1fr; /* Single column on very small screens */
+        gap: 20px;
+    }
+    .gallery-item img {
+        height: 280px; /* Height can be a bit more if single column */
+    }
+     .gallery-item:hover { /* Simplify hover for smaller screens if intense effects are too much */
+        transform: translateY(-5px);
+    }
+    .gallery-intro {
+        font-size: 0.9rem;
+    }
+}
+
+
+
+/* --- Merch Page Specific Styles --- */
+/* Add Anton font for impactful product names or prices */
+/* @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap'); */
+/* Already in HTML link */
+
+#merch-showcase {
+    background-color: #181818; /* Slightly different dark shade */
+}
+
+/* Optional Merch Filters Styling */
+.merch-filters {
+    margin-bottom: 40px;
+    text-align: center;
+}
+.filter-btn {
+    background: #333;
+    color: #bbb;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    font-weight: 500;
+}
+.filter-btn:hover, .filter-btn.active {
+    background-color: #ff00d4;
+    color: #111;
+}
+
+.merch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 35px; /* Good spacing */
+}
+
+.product-card {
+    background: #222222;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.35s cubic-bezier(0.215, 0.610, 0.355, 1), box-shadow 0.35s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(255, 0, 221, 0.15);
+}
+
+.product-image-container {
+    position: relative;
+    background-color: #303030; /* Placeholder bg for images */
+    /* aspect-ratio: 1 / 1; /* For square images */
+    height: 300px; /* Or fixed height */
+    overflow: hidden; /* For image zoom */
+}
+
+.product-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* or contain if you don't want cropping */
+    transition: transform 0.5s ease, filter 0.3s ease;
+}
+
+.product-card:hover .product-image-container img {
+    transform: scale(1.08);
+    filter: saturate(1.1);
+}
+
+.product-tag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.product-tag.new-arrival {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+.product-tag.best-seller {
+    background-color: #e91ea5; /* Pink/Red */
+    color: white;
+}
+.product-tag.limited-edition {
+    background-color: #03A9F4; /* Blue */
+    color: white;
+}
+.product-tag.featured-tag {
+    background-color: #FFC107; /* Amber/Gold */
+    color: #111;
+    font-size: 0.8rem;
+    padding: 7px 14px;
+}
+
+
+.product-info {
+    padding: 20px;
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Pushes button to bottom */
+}
+
+.product-name {
+    font-family: 'Bebas Neue', cursive; /* Impactful font for name */
+    font-size: 1.7rem;
+    color: #FFFFFF;
+    margin-bottom: 8px;
+    line-height: 1.2;
+    letter-spacing: 1px;
+    min-height: 40px; /* To allow for 2 lines and maintain alignment */
+}
+
+.product-price {
+    font-family: 'Anton', sans-serif; /* Strong font for price */
+    font-size: 1.9rem;
+    color: #ff00d4; /* Matatu Gold for price */
+    margin-bottom: 15px;
+    font-weight: 400; /* Anton is already bold */
+}
+
+.product-cta-btn {
+    background: linear-gradient(45deg, #ff00b3, #ff00d4);
+    color: #111;
+    border: none;
+    padding: 12px 20px;
+    width: 100%; /* Full width button */
+    border-radius: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    box-shadow: 0 4px 10px rgba(255, 0, 179, 0.2);
+}
+.product-cta-btn i { /* Icon spacing */
+    margin-right: 8px;
+}
+
+.product-cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 0, 221, 0.4);
+}
+.product-cta-btn:active {
+    transform: translateY(0);
+}
+
+/* Special style for "View Details" button if different */
+.product-cta-btn-alt {
+    background: transparent;
+    border: 2px solid #ff00b3;
+    color: #f700ff;
+    box-shadow: none;
+}
+.product-cta-btn-alt:hover {
+    background: #ff00aa;
+    color: #111;
+    box-shadow: 0 6px 15px rgba(247, 0, 255, 0.3);
+}
+
+/* Styles for featured product */
+.product-card-featured {
+    grid-column: 1 / -1; /* Span full width in the grid */
+    /* Or use: grid-column: span 2; if you want it to span e.g. 2 columns on wider screens */
+    display: flex;
+    flex-direction: row; /* Side-by-side layout */
+    align-items: center;
+    background: linear-gradient(135deg, #2a2a2a, #1e1e1e); /* Slightly different background */
+    padding: 20px; /* Internal padding for featured card */
+}
+
+.product-card-featured .product-image-container {
+    flex: 1 1 45%; /* Image takes up space */
+    height: auto; /* Auto height based on aspect ratio of image */
+    aspect-ratio: 4/3; /* Or whatever fits your image best */
+    border-radius: 10px;
+}
+
+.product-card-featured .product-info {
+    flex: 1 1 55%; /* Text content takes more space */
+    text-align: left; /* Align text left for featured card */
+    padding-left: 30px;
+    justify-content: center; /* Vertically center its content */
+}
+
+.product-card-featured .product-name {
+    font-size: 2.5rem;
+}
+.product-card-featured .product-price {
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+}
+.product-desc-short {
+    font-size: 1rem;
+    color: #B0B0B0;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+.product-card-featured .product-cta-btn {
+    width: auto; /* Don't make button full width in featured card */
+    padding: 14px 30px;
+}
+
+/* Responsive adjustments for Merch Page */
+@media (max-width: 992px) {
+    .product-card-featured {
+        flex-direction: column; /* Stack on smaller screens */
+        text-align: center;
+    }
+    .product-card-featured .product-image-container {
+        width: 70%; /* Make image smaller when stacked */
+        margin-bottom: 20px;
+    }
+    .product-card-featured .product-info {
+        padding-left: 0;
+        text-align: center;
+    }
+     .product-card-featured .product-cta-btn {
+        width: 70%; /* Adjust button width when stacked */
+        margin: 0 auto; /* Center it */
+    }
+}
+
+@media (max-width: 768px) {
+    .merch-grid {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* Adjust minmax */
+        gap: 25px;
+    }
+    .product-name {
+        font-size: 1.5rem;
+    }
+    .product-price {
+        font-size: 1.7rem;
+    }
+    .product-card-featured .product-image-container {
+        width: 80%;
+    }
+     .product-card-featured .product-name {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .merch-grid {
+        grid-template-columns: 1fr; /* Single column for products */
+        gap: 30px;
+    }
+     .product-image-container {
+        height: 280px; /* Can be a bit taller in single column */
+    }
+    .product-name {
+        font-size: 1.6rem;
+    }
+    .product-price {
+        font-size: 1.8rem;
+    }
+    .product-card-featured .product-image-container {
+        width: 100%; /* Full width for featured image on small screens */
+        aspect-ratio: 16/9;
+    }
+     .product-card-featured .product-name {
+        font-size: 1.8rem;
+    }
+    .product-card-featured .product-cta-btn {
+        width: 100%; /* Full width for featured CTA on smallest screens */
+    }
+}
+
+/* --- Booking Page Specific Styles --- */
+
+#booking-form-section {
+    background-color: #121212; /* Dark background */
+    padding-top: 60px; /* Adjusted padding */
+    padding-bottom: 80px;
+}
+
+.booking-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Form takes more space */
+    gap: 50px;
+    align-items: flex-start; /* Align items to the top of their grid cell */
+}
+
+.booking-form-wrapper {
+    background-color: #1E1E1E; /* Dark card background */
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.booking-form-wrapper h2 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2.8rem;
+    color: #ff00b3;
+    margin-bottom: 10px;
+    text-align: center;
+    letter-spacing: 1.5px;
+}
+.booking-form-wrapper h2::after { /* remove general after style */
+    content: none;
+}
+
+
+.form-intro {
+    font-size: 0.95rem;
+    color: #A0A0A0;
+    text-align: center;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.9rem;
+    color: #B0B0B0;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-group label .required {
+    color: #E91E63; /* Accent color for required asterisk */
+    font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group input[type="tel"],
+.form-group input[type="email"],
+.form-group input[type="date"],
+.form-group input[type="time"],
+.form-group input[type="number"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 14px;
+    background-color: #2C2C2C; /* Dark input background */
+    border: 1px solid #444;
+    border-radius: 8px;
+    color: #E0E0E0; /* Light text color */
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="tel"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="date"]:focus,
+.form-group input[type="time"]:focus,
+.form-group input[type="number"]:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #ff00b3;
+    box-shadow: 0 0 0 3px rgba(255, 0, 234, 0.3);
+}
+
+/* Styling for select arrow */
+.form-group select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFD700%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.4-5.4-13z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 12px 12px;
+    padding-right: 40px; /* Make space for arrow */
+}
+/* Fix for Firefox, which needs explicit color for placeholder text */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #666;
+    opacity: 1; /* Firefox fix */
+}
+
+
+/* For side-by-side form fields */
+.form-group-half {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group input[type="checkbox"] {
+    width: auto; /* Don't make checkbox full width */
+    margin-right: 10px;
+    vertical-align: middle; /* Align with label text */
+    accent-color: #ff00d4; /* Color the checkbox itself */
+}
+.checkbox-label {
+    font-size: 0.85rem;
+    color: #A0A0A0;
+    font-weight: 400; /* Lighter weight for checkbox label */
+}
+
+.btn-submit-booking {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(45deg, #ff00ea, #ff00aa); /* Slightly different gold gradient */
+    color: #111;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: 'Bebas Neue', cursive;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 0, 191, 0.3);
+}
+.btn-submit-booking i {
+    margin-right: 10px;
+}
+.btn-submit-booking:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 0, 200, 0.5);
+}
+
+/* Booking Info Panel (Right side) */
+.booking-info-panel {
+    background-color: #1E1E1E;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    color: #B0B0B0;
+}
+
+.booking-info-image {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.booking-info-panel h3 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.8rem;
+    color: #ff00b3;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.booking-info-panel ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 25px;
+}
+
+.booking-info-panel ul li {
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+    line-height: 1.6;
+    display: flex;
+    align-items: flex-start; /* Align icon and text at top */
+}
+.booking-info-panel ul li i {
+    color: #ff00aa;
+    margin-right: 12px;
+    font-size: 1.1em; /* Make icon slightly larger than text */
+    padding-top: 0.15em; /* Align icon better with text */
+}
+
+.booking-info-panel .disclaimer {
+    font-size: 0.85rem;
+    color: #888;
+    font-style: italic;
+    line-height: 1.5;
+    padding-top: 15px;
+    border-top: 1px solid #333;
+}
+
+/* Responsive adjustments for Booking Page */
+@media (max-width: 992px) {
+    .booking-container {
+        grid-template-columns: 1fr; /* Stack form and info panel */
+    }
+    .booking-form-wrapper {
+        margin-bottom: 40px; /* Add space when stacked */
+    }
+}
+
+@media (max-width: 768px) {
+    .booking-form-wrapper {
+        padding: 25px 30px;
+    }
+    .booking-form-wrapper h2 {
+        font-size: 2.4rem;
+    }
+    .form-group-half {
+        grid-template-columns: 1fr; /* Stack half-width fields */
+        gap: 0; /* Remove gap, default margin-bottom will handle spacing */
+    }
+     .form-group-half > div:not(:last-child) {
+        margin-bottom: 25px; /* Add margin back when stacked */
+    }
+    .btn-submit-booking {
+        font-size: 1rem;
+        padding: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+     .booking-form-wrapper {
+        padding: 20px;
+    }
+    .booking-form-wrapper h2 {
+        font-size: 2rem;
+    }
+    .form-group input[type="text"],
+    .form-group input[type="tel"],
+    .form-group input[type="email"],
+    .form-group input[type="date"],
+    .form-group input[type="time"],
+    .form-group input[type="number"],
+    .form-group select,
+    .form-group textarea {
+        padding: 12px;
+        font-size: 0.95rem;
+    }
+}
+
+
+/* --- PASTE THIS AT THE END OF YOUR MASTER style.css FILE --- */
+
+/* Lightbox & Image Load Styles from the original gal.css */
+/* This ensures the JS-powered lightbox continues to work perfectly. */
+
+.gallery-item img.loaded {
+    opacity: 1;
+}
+
+.lightbox {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    animation: fadeIn 0.3s ease-in-out;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    /* For flexbox centering if you use display:flex in JS */
+    align-items: center; 
+    justify-content: center;
+}
+
+.lightbox-content {
+    position: relative; /* Changed from absolute for flexbox centering */
+    max-width: 90vw;
+    max-height: 85vh;
+    border-radius: 5px;
+    object-fit: contain;
+}
+
+.close-btn, .prev-btn, .next-btn {
+    cursor: pointer;
+    position: absolute;
+    color: white;
+    font-size: 2.5rem;
+    font-weight: bold;
+    transition: 0.3s;
+    user-select: none;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    padding: 10px;
+}
+
+.close-btn:hover, .prev-btn:hover, .next-btn:hover {
+    color: #ccc;
+}
+
+.close-btn {
+    top: 15px;
+    right: 25px;
+    font-size: 3rem;
+}
+
+.prev-btn {
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+}
+
+.next-btn {
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Responsive Lightbox Adjustments */
+@media (max-width: 480px) {
+    .close-btn { top: 10px; right: 15px; font-size: 2.5rem; }
+    .prev-btn, .next-btn { font-size: 2rem; }
+}

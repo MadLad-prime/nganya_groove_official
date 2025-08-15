@@ -1,0 +1,117 @@
+<!-- START OF FILE blog.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naganya Groove - Blog</title>
+    <!-- The single, powerful stylesheet -->
+    <link rel="stylesheet" href="/styles_3.css">
+    <!-- Fonts and Icons from KCM design -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="favicon.jpg" type="image/x-icon">
+</head>
+<body>
+
+    <!-- KCM Header Structure -->
+    <header>
+        <nav>
+            <a href="/index.html" class="nav-logo animate-on-load" style="animation-name: fadeInLeft;">NG</a>
+            <div class="nav-links-center">
+                <a href="blog.html" class="nav-link-active">Blog</a>
+                <a href="/gallery/gallery.html">Gallery</a>
+                <a href="/merch/merch.html">Merch</a>
+            </div>
+            <a href="/booking/booking.html" class="nav-cta">Book Now</a> <!-- Update href later -->
+        </nav>
+    </header>
+
+    <main>
+        <!-- KCM Hero Section -->
+        <section id="blog-hero" class="page-hero-section">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1 class="animate-on-load hero-title" style="animation-name: fadeInUp; animation-delay: 0.5s;">Matatu Chronicles</h1>
+                <p class="page-hero-subtitle animate-on-load" style="animation-name: fadeInUp; animation-delay: 0.7s;">Stories, Insights, and the Pulse of the Streets</p>
+            </div>
+        </section>
+
+        <!-- KCM Blog Showcase, integrated with Firebase placeholders -->
+        <section id="blog-showcase" class="content-section">
+            <h2 class="animate-on-scroll" data-animation="fadeInUp-scroll">From Our Pavement Pundits</h2>
+            
+            <!-- This loader is targeted by blog.js -->
+            <div id="blog-loader" class="loader"></div>
+            
+            <!-- This div is targeted by blog.js to inject the post cards -->
+            <div id="blog-posts-list" class="blog-cards-grid">
+                <!-- Blog post summaries will be injected here by blog.js -->
+            </div>
+        </section>
+    </main>
+
+    <!-- KCM Lightbox structure. This replaces your old #full-post-view div -->
+    <div id="blog-lightbox" class="lightbox-modal" aria-hidden="true">
+        <div class="lightbox-overlay" data-close-lightbox></div>
+        <div class="lightbox-content-wrapper">
+            <button class="lightbox-close" data-close-lightbox aria-label="Close modal">×</button>
+            <div class="lightbox-content-scrollable">
+                <!-- Full blog post content will be injected here by blog.js -->
+            </div>
+        </div>
+    </div>
+
+    <!-- KCM Footer Structure -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>Email: info@naganyagroove.co.ke</p>
+                <p>Phone: +254 700 123 456</p>
+            </div>
+            <div class="footer-section">
+                <h4>Find Us</h4>
+                <p>Matatu Terminal Hub, CBD, Nairobi</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© <span id="current-year"></span> Naganya Groove. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="spinner"></div>
+    </div>
+    <script>
+      window.addEventListener('load', () => {
+          const preloader = document.getElementById('preloader');
+          if (preloader) {
+              preloader.style.opacity = '0';
+              setTimeout(() => {
+                  preloader.style.display = 'none';
+              }, 500);
+          }
+      });
+    </script>
+
+    <!-- Firebase SDKs (Compat version) - CRUCIAL -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    
+    <!-- Firebase Configuration - CRUCIAL -->
+    <script src="/firebase-config.js"></script> <!-- ⚠️  MAKE SURE THIS FILE EXISTS AND IS CONFIGURED -->
+
+    <!-- Your new, adapted blog.js file -->
+    <script src="blog.js"></script>
+</body>
+</html>

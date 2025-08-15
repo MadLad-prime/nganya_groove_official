@@ -1,0 +1,192 @@
+/*
+ * ===================================================================
+ * KITUO CHA MATATU - FINAL BOOKING PAGE STYLESHEET
+ * ===================================================================
+ */
+
+/* --- Basic Reset & Global Styles --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Montserrat', sans-serif; line-height: 1.7; color: #333333; background-color: #FFFFFF; overflow-x: hidden; }
+h1, h2, h3, h4 { font-family: 'Bebas Neue', cursive; letter-spacing: 1.5px; font-weight: 500; color: #333333; }
+a { text-decoration: none; color: #FF8C00; transition: color 0.3s ease; }
+a:hover { color: #FFA500; }
+img { max-width: 100%; height: auto; display: block; }
+main { overflow: hidden; }
+.content-section { padding: 80px 20px; }
+
+/* --- Animation Classes --- */
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-40px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInLeft { from { opacity: 0; transform: translateX(-60px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes fadeInRight { from { opacity: 0; transform: translateX(60px); } to { opacity: 1; transform: translateX(0); } }
+.animate-on-load { opacity: 0; animation-duration: 0.8s; animation-fill-mode: forwards; animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1); }
+.animate-on-scroll { opacity: 0; transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.animate-on-scroll.is-visible { opacity: 1; transform: none; }
+.fadeInUp-scroll { transform: translateY(50px); }
+.fadeInLeft-scroll { transform: translateX(-70px); }
+.fadeInRight-scroll { transform: translateX(70px); }
+
+/*
+ * ===================================================================
+ * UNIFIED & RESPONSIVE NAVIGATION STYLES
+ * (This is the corrected "always-visible" navigation)
+ * ===================================================================
+ */
+header {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2.2rem;
+    color: #FF8C00;
+    font-weight: bold;
+    flex-shrink: 0; /* Prevents the logo from shrinking */
+}
+
+.nav-links-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px; /* Spacing for desktop */
+}
+
+.nav-links-center a {
+    color: #333333;
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+    white-space: nowrap; /* Prevents text wrapping */
+}
+
+.nav-links-center a:hover {
+    color: #FF8C00;
+}
+
+.nav-cta {
+    background: #FF8C00;
+    color: #FFFFFF;
+    padding: 0.8rem 1.8rem;
+    border-radius: 50px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    text-align: center;
+    flex-shrink: 0; /* Prevents the button from shrinking */
+}
+
+.nav-cta:hover {
+    background-color: #FFA500;
+    transform: translateY(-2px);
+    color: #FFFFFF;
+}
+
+/* --- Page Hero Section --- */
+.page-hero-section { height: 55vh; position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background-image: url('/images/bk2.png'); background-size: cover; background-position: center 60%; padding: 20px; margin-top: 70px; }
+.hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgb(253, 253, 253); z-index: 1; }
+.hero-content { position: relative; z-index: 2; }
+.hero-content .hero-title { font-size: 4rem; color: #000000; text-shadow: 2px 2px 10px rgb(255, 255, 255); margin: 0; }
+.page-hero-subtitle { font-size: 1.3rem; color: #221f1f; font-weight: 400; margin-top: 10px; }
+
+/* --- Booking Form & Info Panel --- */
+.booking-container { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 45px; }
+.booking-form-wrapper { background-color: #f9f9f9; padding: 30px; border-radius: 15px; border: 1px solid #e9e9e9; order: 2; }
+.booking-form-wrapper h2 { font-size: 2.8rem; color: #FF8C00; text-align: center; margin-bottom: 10px; }
+.form-intro { font-size: 1rem; color: #666; text-align: center; margin-bottom: 35px; max-width: 600px; margin-left: auto; margin-right: auto; }
+.form-group { margin-bottom: 25px; }
+.form-group label { display: block; font-size: 0.9rem; color: #555; margin-bottom: 8px; font-weight: 500; }
+.form-group label .required { color: #E53935; font-weight: bold; margin-left: 4px; }
+.form-group input[type="text"], .form-group input[type="tel"], .form-group input[type="email"], .form-group input[type="date"], .form-group input[type="time"], .form-group input[type="number"], .form-group select, .form-group textarea { width: 100%; padding: 14px; background-color: #FFFFFF; border: 1px solid #ccc; border-radius: 8px; color: #333; font-size: 1rem; font-family: 'Montserrat', sans-serif; transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: #FF8C00; box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.2); }
+textarea { resize: vertical; min-height: 100px; }
+.form-group-half { display: flex; flex-direction: column; gap: 25px; }
+.checkbox-label { display: inline-block; margin-left: 10px; font-size: 0.9rem; color: #555; font-weight: 400; }
+.btn-submit-booking { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 16px; background: #FF8C00; color: #FFFFFF; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: bold; text-transform: uppercase; font-family: 'Bebas Neue', cursive; letter-spacing: 1.5px; cursor: pointer; transition: all 0.3s ease; }
+.btn-submit-booking:hover { background-color: #FFA500; transform: translateY(-3px); box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3); }
+#booking-status-message { margin-top: 20px; font-weight: 500; text-align: center; padding: 10px; border-radius: 5px; }
+.booking-info-panel { background-color: #fff; padding: 25px; border-radius: 15px; order: 1; }
+.booking-info-image { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 25px; }
+.booking-info-panel h3 { font-size: 1.8rem; color: #FF8C00; margin-bottom: 20px; text-align: center; }
+.booking-info-panel ul { list-style: none; margin-bottom: 25px; }
+.booking-info-panel ul li { font-size: 1rem; margin-bottom: 15px; display: flex; align-items: flex-start; gap: 15px; }
+.booking-info-panel ul li i { color: #FF8C00; font-size: 1.2rem; margin-top: 4px; }
+.disclaimer { font-size: 0.9rem; color: #777; font-style: italic; background: #f9f9f9; padding: 15px; border-radius: 8px; text-align: center; border-left: 4px solid #FFA500; }
+
+/* --- Footer --- */
+footer { background-color: #f8f9fa; color: #555; padding: 60px 20px 20px; border-top: 1px solid #e0e0e0; }
+.footer-content { max-width: 1100px; margin: 0 auto 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; }
+.footer-section h4 { color: #FF8C00; font-size: 1.4rem; margin-bottom: 20px; }
+.footer-section ul { list-style: none; }
+.footer-section ul li { margin-bottom: 10px; }
+.footer-section ul li a { color: #555; }
+.footer-section ul li a:hover { padding-left: 5px; }
+.social-icons a { margin-right: 15px; font-size: 1.5rem; color: #555; }
+.social-icons a:hover { color: #FF8C00; transform: scale(1.1); }
+.footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid #e0e0e0; font-size: 0.9rem; color: #888; }
+.watermark { color: #4F6D92; }
+
+/*
+ * ===================================================================
+ * RESPONSIVE STYLES
+ * ===================================================================
+ */
+
+/* --- Tablet and Mobile --- */
+@media (max-width: 768px) {
+    /* Responsive Navigation Adjustments */
+    nav { padding: 0 15px; }
+    .nav-logo { font-size: 1.8rem; }
+    .nav-links-center { gap: 12px; }
+    .nav-links-center a { font-size: 0.85rem; letter-spacing: 0.5px; }
+    .nav-cta { padding: 0.7rem 1rem; font-size: 0.85rem; }
+
+    /* Other page content adjustments */
+    .hero-content .hero-title { font-size: 4rem; }
+}
+
+/* --- Larger Desktop Screens --- */
+@media (min-width: 992px) {
+    .content-section { padding: 100px 20px; }
+    .hero-content .hero-title { font-size: 5rem; }
+    .form-group-half { flex-direction: row; gap: 20px; }
+    .form-group-half > div { flex: 1; }
+    .booking-container { display: grid; grid-template-columns: 2fr 1fr; gap: 60px; align-items: flex-start; }
+    .booking-form-wrapper { order: 1; padding: 40px; }
+    .booking-info-panel { order: 2; padding: 40px; }
+    .booking-info-image { height: 250px; }
+}
+
+/* --- Small Mobile Devices --- */
+@media (max-width: 480px) {
+    .hero-content .hero-title { font-size: 3rem; }
+    .page-hero-subtitle { font-size: 1.1rem; }
+    .content-section { padding: 60px 15px; }
+}
+
+/* Specific tweaks for very narrow screens to prevent overflow */
+@media (max-width: 420px) {
+    .nav-links-center { gap: 8px; }
+    .nav-links-center a { font-size: 0.75rem; }
+    .nav-cta { padding: 0.6rem 0.8rem; font-size: 0.75rem; }
+}

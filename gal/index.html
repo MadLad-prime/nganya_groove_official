@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nganya Groove - Celebrating Matatu Culture</title>
+    <link rel="stylesheet" href="home.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="icon" href="favicon.jpg" type="image/x-icon">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#FF8C00">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="index.html" class="nav-logo animate-on-load" style="animation-name: fadeInLeft;">Nganya Groove</a>
+            <div class="nav-links-center">
+                <a href="/blog/blog.html" data-page="blog" class="animate-on-load" style="animation-name: fadeInDown; animation-delay: 0.2s;">Blog</a>
+                <a href="gallery/gallery.html" data-page="gallery" class="animate-on-load" style="animation-name: fadeInDown; animation-delay: 0.4s;">Gallery</a>
+                <a href="/merch/merch.html" data-page="merch" class="animate-on-load" style="animation-name: fadeInDown; animation-delay: 0.6s;">Merch</a>
+            </div>
+            <a href="/booking/booking.html" data-page="booking" class="nav-cta animate-on-load" style="animation-name: fadeInRight; animation-delay: 0.2s;">Groove Safaris</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1 class="animate-on-load hero-title" style="animation-name: fadeInUp; animation-delay: 0.5s;">Nganya Groove</h1>
+                <p class="hero-subtitle animate-on-load" style="animation-name: fadeInUp; animation-delay: 0.7s;">Join The Ride, Feel The Vibe</p>
+                <a href="/booking/booking.html" class="btn-hero animate-on-load" style="animation-name: fadeInUp; animation-delay: 0.9s;">Book Now</a>
+            </div>
+        </section>
+
+        <!-- SECTION WITH LIGHTBOX FUNCTIONALITY -->
+        <section id="top-nganyas" class="content-section">
+            <h2 class="animate-on-scroll" data-animation="fadeInUp-scroll">The top 3 Nganyas</h2>
+            <div class="blog-grid">
+
+                <!-- Nganya Card 1: Add your full content in the data attributes -->
+                <div class="blog-card animate-on-scroll" data-animation="fadeInUp-scroll" data-delay="0.1s"
+                     data-img="images/hb1.jpg"
+                     data-title="Catalyst: The Pride of Ongata Rongai"
+                     data-meta="Route: 125 | Voted: Fan Favorite"
+                     data-text="Known for its stunning graffiti and bone-rattling sound system, Catalyst is a true icon on the 125 route. Its interior features custom seats and a state-of-the-art screen setup, making every journey an experience. The crew's energy is unmatched, ensuring that riders are not just commuting, but are part of a mobile party. Discover what makes it a fan favorite.">
+                    <img src="images/hb1.jpg" alt="Nganya 1">
+                    <div class="blog-card-content">
+                        <h3>Catalyst: The Pride of Ongata Rongai</h3>
+                        <p>Known for its stunning graffiti and bone-rattling sound system, Catalyst is a true icon on the 125 route. Discover what makes it a fan favorite...</p>
+                        <a href="#" class="read-more-btn">View Details</a>
+                    </div>
+                </div>
+
+                <!-- Nganya Card 2: Add your full content in the data attributes -->
+                <div class="blog-card animate-on-scroll" data-animation="fadeInUp-scroll" data-delay="0.3s"
+                     data-img="images/hb2.jpg"
+                     data-title="Dethrone: Umoja's Crown Jewel"
+                     data-meta="Route: 35/60 | Voted: Most Comfortable"
+                     data-text="With its sleek, minimalist design and an unparalleled focus on comfort, Dethrone has redefined the commute for residents of Umoja. It features plush, spacious seating and a premium, curated playlist that sets a relaxed vibe, a stark contrast to the usual chaos. It's the go-to choice for a calm and stylish ride. Explore its unique features.">
+                    <img src="images/hb2.jpg" alt="Nganya 2">
+                    <div class="blog-card-content">
+                        <h3>Dethrone: Umoja's Crown Jewel</h3>
+                        <p>With its sleek design and unparalleled comfort, Dethrone has redefined the commute for residents of Umoja. Explore its unique features...</p>
+                        <a href="#" class="read-more-btn">View Details</a>
+                    </div>
+                </div>
+
+                <!-- Nganya Card 3: Add your full content in the data attributes -->
+                <div class="blog-card animate-on-scroll" data-animation="fadeInUp-scroll" data-delay="0.5s"
+                     data-img="images/hb3.jpg"
+                     data-title="Punisher: The Buruburu Beast"
+                     data-meta="Route: 58 | Voted: Best Lighting & Sound"
+                     data-text="A true legend on the Buruburu 58 route, Punisher is famed for its aggressive styling, raw power, and an electrifying interior lighting system that pulses with the beat. It's not just a ride; it's a daily thrill that commands respect on the road. See why it's the undisputed beast of the East.">
+                    <img src="images/hb3.jpg" alt="Nganya 3">
+                    <div class="blog-card-content">
+                        <h3>Punisher: The Buruburu Beast</h3>
+                        <p>A legend on the Buruburu 58 route, Punisher is famed for its speed and electrifying interior lighting. See why it's a daily thrill ride...</p>
+                        <a href="#" class="read-more-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+            <!-- This button is now correctly preserved -->
+            <div class="view-all-container animate-on-scroll" data-animation="fadeInUp-scroll">
+                <a href="gallery.html" class="btn-secondary">View Full Fleet</a>
+            </div>
+        </section>
+
+        <section id="about-us" class="content-section">
+            <h2 class="animate-on-scroll" data-animation="fadeInUp-scroll">About Nganya Groove</h2>
+            <div class="about-content">
+                <img src="images/ab.jpg" alt="Nganya Groove" class="about-image animate-on-scroll" data-animation="fadeInLeft-scroll">
+                <div class="about-text animate-on-scroll" data-animation="fadeInRight-scroll">
+                    <p><strong>Karibu! We are Nganya Groove, the digital creators dedicated to celebrating Kenya's vibrant and dynamic matatu culture.</strong></p>
+                    <p>Recognized as the <strong>Most Preferred YouTube Channel of the Year 2024</strong>, our passion is to share the art, the music, the hustle, and the sheer energy of these iconic vehicles with the world. We are more than just a channel; we're a community.</p>
+                    <p>From the latest Nganya news on our blog to stunning graffiti in our gallery, we are your digital hub for everything matatu. Join us as we explore the routes, the stories, and the soul of Kenya's public transport kings. <strong>Join the ride, feel the vibe!</strong></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="community-stats" class="content-section">
+            <h2 class="animate-on-scroll" data-animation="fadeInUp-scroll">Join Our Community</h2>
+            <div class="stats-container">
+                <a href="https://youtube.com/@nganyagroove" target="_blank" class="stat-item animate-on-scroll" data-animation="fadeInUp-scroll" data-delay="0.1s" aria-label="Nganya Groove YouTube">
+                    <i class="fab fa-youtube"></i>
+                    <h3>Award Winning</h3>
+                    <p>Voted #1 Matatu Channel of 2024</p>
+                </a>
+                <a href="https://www.instagram.com/nganyagroove" target="_blank" class="stat-item animate-on-scroll" data-animation="fadeInUp-scroll" data-delay="0.3s" aria-label="Nganya Groove Instagram">
+                    <i class="fab fa-instagram"></i>
+                    <h3>15.2K+ Followers</h3>
+                    <p>A thriving community on Instagram</p>
+                </a>
+                <a href="https://youtube.com/@nganyagroove/videos" target="_blank" class="stat-item animate-on-scroll" data-animation="fadeInUp-scroll" data-delay="0.5s" aria-label="Nganya Groove Videos">
+                    <i class="fas fa-video"></i>
+                    <h3>820+ Posts</h3>
+                    <p>Sharing daily vibes and content</p>
+                </a>
+                <a href="https://www.tiktok.com/@nganyagroove?_t=ZM-8xwm0Ym3nJo&_r=1" target="_blank" class="stat-item animate-on-scroll" data-animation="fadeInUp-scroll" data-delay="0.7s" aria-label="Nganya Groove TikTok">
+                    <i class="fab fa-tiktok"></i>
+                    <h3>50K+ Fans</h3>
+                    <p>Trending clips & behind-the-scenes</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- NEW: Lightbox Modal HTML Structure -->
+    <div id="lightbox-modal" class="lightbox-modal">
+        <div class="lightbox-content-wrapper">
+            <button id="lightbox-close" class="lightbox-close">×</button>
+            <div id="lightbox-scrollable" class="lightbox-content-scrollable">
+                <img src="" alt="Full Nganya Post Image" id="full-post-image" class="full-post-image">
+                <h2 id="full-post-title" class="full-post-title"></h2>
+                <div id="full-post-meta" class="full-post-meta"></div>
+                <div id="full-post-content"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="merch.html">Merch</a></li>
+                    <li><a href="booking.html">Book a Matatu</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>Email: info@nganyagroove.com</p>
+                <p>Phone: +254 700 123 456</p>
+                <p>For business inquiries, please email us.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <p>Join the ride on social media!</p>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/nganyagroove" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://youtube.com/@nganyagroove" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© <span id="current-year"></span> Nganya Groove. All Rights Reserved.</p>
+            <div class="watermark">
+                <a href="#" target="_blank" rel="noopener noreferrer" title="Visit the developer's page">
+                    <i class="fas fa-code"></i>
+                    <span>Web App by Nuno</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Existing Scroll Animation Script -->
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+        const observerCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    const animationDelay = entry.target.dataset.delay;
+                    if(animationDelay) entry.target.style.transitionDelay = animationDelay;
+                }
+            });
+        };
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            const animationType = el.dataset.animation || 'fadeInUp-scroll';
+            el.classList.add(animationType);
+            observer.observe(el);
+        });
+    </script>
+    
+    <!-- NEW: Lightbox Functionality Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const lightboxModal = document.getElementById('lightbox-modal');
+            const closeButton = document.getElementById('lightbox-close');
+            const detailButtons = document.querySelectorAll('.read-more-btn');
+
+            const postImage = document.getElementById('full-post-image');
+            const postTitle = document.getElementById('full-post-title');
+            const postMeta = document.getElementById('full-post-meta');
+            const postContent = document.getElementById('full-post-content');
+            const scrollableArea = document.getElementById('lightbox-scrollable');
+
+            const openLightbox = (e) => {
+                e.preventDefault();
+                const card = e.currentTarget.closest('.blog-card');
+                
+                // Populate lightbox content from data attributes
+                postImage.src = card.dataset.img;
+                postTitle.textContent = card.dataset.title;
+                postMeta.textContent = card.dataset.meta;
+                // To render text with line breaks, you can wrap it in <p> tags
+                postContent.innerHTML = `<p>${card.dataset.text.replace(/\n/g, '</p><p>')}</p>`;
+
+                // Show the modal
+                lightboxModal.classList.add('is-active');
+                document.body.style.overflow = 'hidden';
+            };
+
+            const closeLightbox = () => {
+                lightboxModal.classList.remove('is-active');
+                document.body.style.overflow = 'auto';
+                // Reset scroll position for next time
+                scrollableArea.scrollTop = 0;
+            };
+
+            detailButtons.forEach(button => button.addEventListener('click', openLightbox));
+            closeButton.addEventListener('click', closeLightbox);
+            
+            // Close lightbox when clicking on the dark background
+            lightboxModal.addEventListener('click', (e) => {
+                if (e.target === lightboxModal) {
+                    closeLightbox();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

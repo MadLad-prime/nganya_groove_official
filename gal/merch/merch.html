@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kituo cha Matatu - Merch</title>
+    <!-- UPDATED: Linking to the new unified stylesheet -->
+    <link rel="stylesheet" href="merch.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;700&family=Anton&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="/favicon.jpg" type="image/x-icon">
+</head>
+<body>
+    <!-- UPDATED: Header structure for the new responsive navbar -->
+    <header>
+        <nav>
+            <a href="/index.html" class="nav-logo animate-on-load" style="animation-name: fadeInLeft;">NG</a>
+            <div class="nav-links-center">
+                <a href="/blog/blog.html">Blog</a>
+                <a href="/gallery/gallery.html">Gallery</a>
+                <a href="/merch/merch.html" class="nav-link-active">Merch</a>
+            </div>
+            <div class="nav-right-actions">
+                <a href="/booking/booking.html" class="nav-cta animate-on-load" style="animation-name: fadeInRight; animation-delay: 0.2s;">Book Now</a>
+                <div id="cart-icon" class="cart-icon-wrapper animate-on-load" style="animation-name: fadeInRight; animation-delay: 0.4s;">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span id="cart-count-badge" class="cart-count-badge">0</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="merch-hero" class="page-hero-section" style="background-image: url('images/merch_cover2.png');">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1 class="animate-on-load hero-title" style="animation-name: fadeInUp; animation-delay: 0.5s;">Ride in Style</h1>
+                <p class="page-hero-subtitle animate-on-load" style="animation-name: fadeInUp; animation-delay: 0.7s;">Official Nganya Groove Gear & Matatu-Inspired Swag</p>
+            </div>
+        </section>
+
+        <section id="merch-showcase" class="content-section">
+            <h2 class="animate-on-scroll" data-animation="fadeInUp-scroll">Grab Your Gear</h2>
+            <div class="merch-grid">
+                <p id="merch-loading-message">Loading fresh gear...</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="/index.html">Home</a></li>
+                    <li><a href="/blog.html">Blog</a></li>
+                    <li><a href="/gallery.html">Gallery</a></li>
+                    <li><a href="/merch.html">Merch</a></li>
+                    <li><a href="/booking/booking.html">Book a Matatu</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>Email: info@kituochamatatu.co.ke</p>
+                <p>Phone: +254 700 123 456</p>
+                <p>P.O. Box 12345 - 00100, Nairobi</p>
+            </div>
+            <div class="footer-section">
+                <h4>Find Us</h4>
+                <p>Matatu Terminal Hub, CBD</p>
+                <p>Nairobi, Kenya</p>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© <span id="current-year"></span> Kituo cha Matatu. All Rights Reserved.</p>
+            <p class="watermark" style="color: #4F6D92;">web app by Nuno</p>
+        </div>
+    </footer>
+
+    <!-- Cart Modal HTML (No changes needed) -->
+    <div id="cart-modal" class="cart-modal">
+        <div id="cart-modal-overlay" class="cart-modal-overlay"></div>
+        <div class="cart-modal-content">
+            <button id="cart-close-btn" class="cart-close-btn">×</button>
+            <h2>Your Cart</h2>
+            <div id="cart-items-container" class="cart-items-container">
+                <!-- Cart items are injected here by JS -->
+            </div>
+            <div class="cart-summary">
+                <div class="cart-total">
+                    <span>Total:</span>
+                    <span id="cart-total-price">Ksh 0</span>
+                </div>
+                <button id="checkout-btn" class="btn-submit-booking">
+                    <i class="fab fa-whatsapp"></i> Order via WhatsApp
+                </button>
+                <p id="cart-status" class="cart-status"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs and Page/Cart Logic (No changes needed) -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script src="/firebase-config.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+            
+            const ADMIN_WHATSAPP_NUMBER = "254792743381";
+            const merchGrid = document.querySelector('.merch-grid');
+            const loadingMessage = document.getElementById('merch-loading-message');
+            
+            const cartModal = document.getElementById('cart-modal');
+            const cartIcon = document.getElementById('cart-icon');
+            const cartCloseBtn = document.getElementById('cart-close-btn');
+            const cartOverlay = document.getElementById('cart-modal-overlay');
+            const cartCountBadge = document.getElementById('cart-count-badge');
+            const cartItemsContainer = document.getElementById('cart-items-container');
+            const cartTotalPriceEl = document.getElementById('cart-total-price');
+            const checkoutBtn = document.getElementById('checkout-btn');
+            const cartStatus = document.getElementById('cart-status');
+            
+            let cart = JSON.parse(localStorage.getItem('kcm_merch_cart')) || [];
+            
+            const showCart = () => {
+                cartModal.classList.add('is-active');
+                document.body.classList.add('no-scroll');
+            };
+
+            const hideCart = () => {
+                cartModal.classList.remove('is-active');
+                document.body.classList.remove('no-scroll');
+            };
+
+            const updateCartIcon = () => {
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartCountBadge.textContent = totalItems;
+                cartCountBadge.style.display = totalItems > 0 ? 'flex' : 'none';
+            };
+
+            const renderCartItems = () => {
+                cartItemsContainer.innerHTML = '';
+                if (cart.length === 0) {
+                    cartItemsContainer.innerHTML = '<p class="cart-empty-message">Your cart is empty.</p>';
+                    return;
+                }
+                cart.forEach(item => {
+                    const itemEl = document.createElement('div');
+                    itemEl.classList.add('cart-item');
+                    itemEl.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                        <div class="cart-item-details">
+                            <h4 class="cart-item-name">${item.name}</h4>
+                            <p class="cart-item-price">Ksh ${item.price.toLocaleString()}</p>
+                        </div>
+                        <div class="cart-item-actions">
+                            <input type="number" class="cart-item-quantity" value="${item.quantity}" min="1" data-id="${item.id}">
+                            <button class="cart-item-remove" data-id="${item.id}">×</button>
+                        </div>
+                    `;
+                    cartItemsContainer.appendChild(itemEl);
+                });
+            };
+            
+            const updateCartTotal = () => {
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                cartTotalPriceEl.textContent = `Ksh ${total.toLocaleString()}`;
+                checkoutBtn.disabled = cart.length === 0;
+            };
+            
+            function updateCart() {
+                renderCartItems();
+                updateCartTotal();
+                updateCartIcon();
+                localStorage.setItem('kcm_merch_cart', JSON.stringify(cart));
+            }
+
+            cartIcon.addEventListener('click', showCart);
+            cartCloseBtn.addEventListener('click', hideCart);
+            cartOverlay.addEventListener('click', hideCart);
+
+            function parsePrice(priceString) {
+                return parseInt(String(priceString).replace(/Ksh|,|\s/g, ''));
+            }
+
+            merchGrid.addEventListener('click', function(event) {
+                const button = event.target.closest('.product-cta-btn');
+                if (button) {
+                    event.preventDefault();
+                    const card = button.closest('.product-card');
+                    const name = card.querySelector('.product-name').textContent;
+                    const priceString = card.querySelector('.product-price').textContent;
+                    const image = card.querySelector('img').src;
+                    const id = name.replace(/\s+/g, '-').toLowerCase();
+                    const existingItem = cart.find(item => item.id === id);
+                    if (existingItem) {
+                        existingItem.quantity++;
+                    } else {
+                        cart.push({ id, name, price: parsePrice(priceString), image, quantity: 1 });
+                    }
+                    const originalText = button.innerHTML;
+                    button.innerHTML = 'Added! <i class="fas fa-check"></i>';
+                    setTimeout(() => { button.innerHTML = originalText; }, 1500);
+                    updateCart();
+                }
+            });
+            
+            cartItemsContainer.addEventListener('input', e => {
+                if (e.target.classList.contains('cart-item-quantity')) {
+                    const id = e.target.dataset.id;
+                    const quantity = parseInt(e.target.value);
+                    const itemInCart = cart.find(item => item.id === id);
+                    if (itemInCart && quantity > 0) {
+                        itemInCart.quantity = quantity;
+                        updateCart();
+                    }
+                }
+            });
+
+            cartItemsContainer.addEventListener('click', e => {
+                 if (e.target.classList.contains('cart-item-remove')) {
+                    const id = e.target.dataset.id;
+                    cart = cart.filter(item => item.id !== id);
+                    updateCart();
+                }
+            });
+
+            checkoutBtn.addEventListener('click', async () => {
+                if (cart.length === 0 || typeof firebase === 'undefined') return;
+                const db = firebase.firestore();
+                checkoutBtn.disabled = true;
+                cartStatus.textContent = "Processing order...";
+                const orderId = `KCM-${Date.now()}`;
+                const orderTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                try {
+                    await db.collection('orders').doc(orderId).set({
+                        orderId: orderId,
+                        items: cart.map(item => ({ name: item.name, quantity: item.quantity, price: item.price })),
+                        totalAmount: orderTotal,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                        status: 'new'
+                    });
+                    let message = `Hello KCM, I would like to place an order.\n\n*Order ID: ${orderId}*\n\n`;
+                    cart.forEach(item => { message += `*${item.quantity}x* ${item.name}\n`; });
+                    message += `\n*Total: Ksh ${orderTotal.toLocaleString()}*\n\nPlease let me know the payment details.`;
+                    const whatsappUrl = `https://wa.me/${ADMIN_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+                    cart = [];
+                    updateCart();
+                    cartStatus.textContent = "Redirecting to WhatsApp...";
+                    setTimeout(() => {
+                        window.location.href = whatsappUrl;
+                        hideCart();
+                        cartStatus.textContent = "";
+                    }, 1500);
+                } catch (error) {
+                    console.error("Error placing order: ", error);
+                    cartStatus.textContent = "Failed to place order. Please try again.";
+                    checkoutBtn.disabled = false;
+                }
+            });
+
+            async function loadProducts() {
+                if (typeof firebase === 'undefined' || !firebase.apps.length) {
+                    loadingMessage.textContent = 'Error: Could not connect to the database.';
+                    return;
+                }
+                const db = firebase.firestore();
+                try {
+                    const snapshot = await db.collection('products').orderBy('createdAt', 'desc').get();
+                    if (snapshot.empty) {
+                        loadingMessage.textContent = 'No products found. Check back soon!';
+                        return;
+                    }
+                    merchGrid.innerHTML = '';
+                    snapshot.forEach(doc => {
+                        const product = doc.data();
+                        const cardHTML = `
+                            <div class="product-card">
+                                <div class="product-image-container">
+                                    <img src="${product.imageUrl}" alt="${product.name}">
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-name">${product.name}</h3>
+                                    <p class="product-desc-short">${product.description || ''}</p>
+                                    <p class="product-price">Ksh ${product.price.toLocaleString()}</p>
+                                    <button class="product-cta-btn">
+                                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        merchGrid.insertAdjacentHTML('beforeend', cardHTML);
+                    });
+                } catch (error) {
+                    console.error("Error loading products: ", error);
+                    loadingMessage.textContent = 'Failed to load products. Please try again later.';
+                }
+            }
+            
+            loadProducts();
+            updateCart();
+        });
+    </script>
+</body>
+</html>
