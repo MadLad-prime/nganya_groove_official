@@ -1,0 +1,26 @@
+{
+  "name": "Nganya Groove",
+  "short_name": "Nganya Groove",
+  "start_url": "/gal/index.html",
+  "display": "standalone",
+  "background_color": "#FF8C00",
+  "theme_color": "#FF8C00",
+  "description": "Celebrating Kenya's vibrant matatu culture.",
+  "icons": [
+    {
+      "src": "images/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "images/favicon.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    }
+  ]
+}
