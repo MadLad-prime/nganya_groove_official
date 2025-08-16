@@ -203,7 +203,7 @@ nav {
     align-items: center;
     text-align: center;
     overflow: hidden;
-    background-image: url('../images/hero.jpg');
+    background-image: url('../images/hero.png');
     background-size: cover;
     background-position: center center;
 }
