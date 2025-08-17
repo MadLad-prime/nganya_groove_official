@@ -1,5 +1,3 @@
-// ⚠️ PASTE YOUR FIREBASE CONFIGURATION OBJECT HERE ⚠️
-// This is an example, replace with your actual config from the Firebase console
 const firebaseConfig = {
   apiKey: "AIzaSyDxQztup6TxUE93f5YqWDwOddcyIbIT-Hs",
   authDomain: "nuno-34208.firebaseapp.com",
