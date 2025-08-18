@@ -370,7 +370,7 @@ footer {
 
 .page-hero-section .hero-content h1 {
     font-size: 5rem;
-    color: #333333;
+    color: #ffa600;
 }
 
 #gallery-showcase {
@@ -655,7 +655,8 @@ footer {
     letter-spacing: 2px;
     margin-bottom: 10px;
     text-transform: uppercase;
-    text-shadow: 2px 2px 10px rgb(255, 191, 16);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    color: #ffc400; /* Change to your desired color */
 }
 
 .page-hero-subtitle {

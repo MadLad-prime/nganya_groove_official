@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         loader.style.display = 'block';
         galleryContainer.style.visibility = 'hidden';
         try {
-            const response = await fetch(`https://res.cloudinary.com/${CLOUDINARY_CONFIG.cloudName}/image/list/${CLOUDINARY_CONFIG.tag}.json?max_results=100`);
+            const response = await fetch(`https://res.cloudinary.com/${CLOUDINARY_CONFIG.cloudName}/image/list/${CLOUDINARY_CONFIG.tag}.json?max_results=1000`);
             if (!response.ok) {
                  throw new Error(`Could not fetch image list. The tag endpoint might be disabled on your Cloudinary account.`);
             }
